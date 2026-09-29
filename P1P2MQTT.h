@@ -99,7 +99,10 @@
 // H-link2 uses larger packets
 // increase RX_BUFFER_SIZE from 65 to 85 for two packets xx0029 without pause in between
 #define TX_BUFFER_SIZE 85  // write buffer size (1 more than max size needed)
-#define RX_BUFFER_SIZE 85  // read buffer (1 more than max size needed), should be <=254
+// Hisense H-NET can transmit a short packet immediately followed by
+// a packet with length 0x4C. A receive buffer of 85 bytes can overflow
+// before the main loop consumes both packets.
+#define RX_BUFFER_SIZE 128  // read buffer (1 more than max size needed), should be <=254
 #elif defined M_SERIES
 #define TX_BUFFER_SIZE 65 // write buffer size (1 more than max size needed)
 #define RX_BUFFER_SIZE 65 // read buffer (1 more than max size needed), should be <=254

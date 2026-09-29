@@ -1800,7 +1800,30 @@ byte writeBudget_prev = 0;
       nread = RB_SIZE;
       readError = 0xFF;
     }
-    for (int i = 0; i < nread; i++) readError |= EB[i];
+    #ifdef H_SERIES
+    // Hisense H-NET packets are currently received through the generic
+    // Hitachi H-series physical layer. Some valid Hisense packets are
+    // marked with ERROR_PE because the Hitachi-specific parity handling
+    // does not fully match Hisense H-NET.
+    //
+    // Brand 8 is the currently configured Hisense brand identifier.
+    // Clear parity errors only. Preserve buffer-overrun, bus, start-bit
+    // and checksum/XOR errors.
+    if (brand == 8) {
+      for (int i = 0; i < nread; i++) {
+        EB[i] &= ~ERROR_PE;
+      }
+    }
+    #endif
+    for (int i = 0; i < nread; i++) {
+      #ifdef H_SERIES
+      if (brand == 8) {
+      // Ignore Hitachi-specific 11/12-bit uncertainty for Hisense H-NET.
+        EB[i] &= ~SIGNAL_UC;
+      }
+      #endif
+      readError |= EB[i];
+    }
     if (skipPackets) {
       if ((skipPackets == SKIP_PACKETS) && !delta) {
         Serial_print(F("* Always skipping first packet if delta == 0. readerror = 0x"));
