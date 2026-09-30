@@ -239,11 +239,11 @@
 #define MIN_ERRORS_PERMITTED     2 // don't start control unless error budget is at least this value
 
 // serial read buffer size for reading from serial port, max line length on serial input is 99 (3 characters per byte, plus 'W" and '\r\n')
-#define RS_SIZE 99
+#define RS_SIZE 200
 // P1/P2 write buffer size for writing to P1P2bus, max packet size is 24 (have not seen anytyhing over 24 (23+CRC))
-#define WB_SIZE 25
+#define WB_SIZE 128
 // P1/P2 read buffer size to store raw data and error codes read from P1P2bus; 1 extra for reading back CRC byte; 24 might be enough
-#define RB_SIZE 65
+#define RB_SIZE 128
 #endif /* EF_SERIES */
 
 #ifdef F1F2_SERIES
@@ -274,8 +274,8 @@
 // serial read buffer size for reading from serial port, max line length on serial input is 150 (2 characters per byte, plus some)
 #define RS_SIZE 150
 // read/write buffer size for writing to P1P2bus, max packet size is 64
-#define WB_SIZE 65
-#define RB_SIZE 65
+#define WB_SIZE 128
+#define RB_SIZE 128
 #endif /* H_SERIES */
 
 #define INIT_ECHO 1         // defines whether written data is read back and verified against written data (advise to keep this 1)

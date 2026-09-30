@@ -221,11 +221,11 @@
 #define MQTT_VALUE_LEN 1000
 #define RB 1000     // max size of readBuffer (serial input from Arduino) (was 400, changed for long-scope-mode to 1000)
 #ifdef F1F2_SERIES
-#define HB 80
+#define HB 128
 #elif not (defined TH_SERIES || defined MHI_SERIES)
 #define HB 24      // max size of hexbuf, same as P1P2Monitor (model-dependent? 24 might be sufficient)
 #else /* MHI_SERIES || TH_SERIES */
-#define HB 65      // max size of hexbuf, same as P1P2Monitor (model-dependent? 24 might be sufficient)
+#define HB 128      // max size of hexbuf, same as P1P2Monitor (model-dependent? 24 might be sufficient)
 #endif /* MHI_SERIES || TH_SERIES */
 #define MQTT_BUFFER_SIZE 2048 // size of ring buffer for MQTT/telnet input handling
 #define MQTT_BUFFER_SPARE 256  // keep a part of buffer reserved for MQTT topic W and telnet input and clean-up
