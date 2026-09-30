@@ -28,6 +28,7 @@ C:\WORK\P1P2MQTT_Hisense\P1P2MQTT_Hisense\examples\P1P2MQTT-bridge\platformio.in
 " -t "P1P2/R/#" -v | Tee-Object -FilePath c:\temp\mqtt_5.txt
 
 
+za pakete z 89 00 30 je naslednja tabela: (primer: 890030010101010101B1400118142D18000000010000000000000000003E000D8181810D0C00000C2000000100110077)
 
 | Payload index | Hex primer          | Dec          | Pomen                                     | Status                |
 | ------------- | ------------------- | ------------ | ----------------------------------------- | --------------------- |
@@ -51,3 +52,9 @@ C:\WORK\P1P2MQTT_Hisense\P1P2MQTT_Hisense\examples\P1P2MQTT-bridge\platformio.in
 | 40            | `01`                |              | Statusni flag                             | Kandidat              |
 | 42            | `11`                | 17           | Outside Temperature                       | ✅ Zelo verjetno       |
 | 44            | `42 → 43 → 52 → 72` |              | Checksum / stanje okvirja                 | Verjetno ne parameter |
+
+
+ za pakete: 89 00 1E 010101010101B815160000000081180E0E0000000000001700002B
+
+
+ 
