@@ -177,7 +177,7 @@
                                // 3 only changed parameters except measurements (temperature, flow) and except date/time
                                // first-time parameters are always reported
 
-#define INIT_OUTPUTMODE 0x0002 // outputmode determines output content and channels, can be changed run-time using 'J'/'j' command, 0x0002=MQTT only, 0x0003=MQTT+raw-hex
+#define INIT_OUTPUTMODE 0x011B // outputmode determines output content and channels, can be changed run-time using 'J'/'j' command, 0x0002=MQTT only, 0x0003=MQTT+raw-hex
 #ifdef MHI_SERIES
 #define INIT_OUTPUTMODE 0x1303B // normally 13003, but 1303B for initial MHI analysis // outputmode determines output content and channels, can be changed run-time using 'J'/'j' command
 #endif /* MHI_SERIES */

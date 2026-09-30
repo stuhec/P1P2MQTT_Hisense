@@ -651,10 +651,10 @@ const PROGMEM uint32_t bytestart[PCKTP_ARR_SZ] = {   0,  20,  40,  60,  80, 100,
 //byte pti                                      =   0..F  (0..7 for 000008..00000F, 8..F for 400008..40000F)                           10-14                           15-1E                                             1F-20                                               2A       2B     2C
 //byte pti                                      =    0    1    2    3    4    5    6    7    8    9   0A   0B   0C   0D   0E   0F      10   11   12   13   14          15   16   17   18   19   1A   1B   1C   1D   1E   1F   20   21  22  23  24  25  26  27  28  29        2A       2B     2C  // length 25->24 when CS_GEN implemented
 //3rd byte                                      =                                                                                      0B   12   27   2D   18          29   29   29   29   29   17   29   29   29   29   29   29    ?   ?   ?   ?   ?   ?   ?   ?   ?        1C       2E     23
-const PROGMEM uint32_t nr_bytes[PCKTP_ARR_SZ]  = {  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,      7,  14,  20,  35,  41,         37,  37,  37,  37,  37,  19,  37,  37,  37,  37,  37,  37,  50, 50, 50, 50, 50, 50, 50, 50, 50,       25     , 43,    32, 36 };
+const PROGMEM uint32_t nr_bytes[PCKTP_ARR_SZ]  = {  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,  20,      7,  14,  20,  35,  41,         37,  37,  37,  37,  37,  19,  37,  37,  37,  37,  37,  37,  50, 50, 50, 50, 50, 50, 50, 50, 50,       25     , 43,    32, 45 };
 const PROGMEM uint32_t bytestart[PCKTP_ARR_SZ] = {   0,  20,  40,  60,  80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300,    320, 327, 341, 361, 396,/*rst*/ 320, 357, 394, 431, 468, 505, 524, 561, 598, 635, 672, 709, 746,796,846,896,946,996,1046,1096,1146,    1196   , 1221,1264, 1296    /* , 746 -> 1296 */ };
-#define sizePayloadByteVal 1332
-#define sizePayloadByteSeen 167 // ceil(1296/8)
+#define sizePayloadByteVal 1341
+#define sizePayloadByteSeen 168 // ceil(1296/8)
 
 # endif /* HITACHI_MODEL */
 
@@ -6148,7 +6148,7 @@ byte bytesbits2keyvalue(byte packetSrc, byte packetDst, byte packetType, byte pa
 * 0x18 = 24 degrees C
 */
 if ((packetSrc == 0x89) && (packetDst == 0x00) && (packetType == 0x30)) {
-  SRC(9);
+  SRC(9);  
 
   switch (payloadIndex) {
     case 9:
@@ -6157,6 +6157,27 @@ if ((packetSrc == 0x89) && (packetDst == 0x00) && (packetType == 0x30)) {
     HACONFIG;
     HATEMP0;
     KEY1_PUB_CONFIG_CHECK_ENTITY("Cycle1_Water_Temperature_Setpoint");
+    VALUE_u8;
+    case 13:
+    SUBDEVICE("_Hisense");
+    CAT_SETTING;
+    HACONFIG;
+    HADEVICE_BINSENSOR;
+    KEY1_PUB_CONFIG_CHECK_ENTITY("Heatpump_Enabled");
+    VALUE_u8;
+    case 18:
+    SUBDEVICE("_Hisense");
+    CAT_MEASUREMENT;
+    HACONFIG;
+    HADEVICE_BINSENSOR;
+    KEY1_PUB_CONFIG_CHECK_ENTITY("Circulation_Pump_Running");
+    VALUE_S_L(payloadByte != 0, 1);
+    case 42:
+    SUBDEVICE("_Hisense");
+    CAT_SETTING;
+    HACONFIG;
+    HATEMP0;
+    KEY1_PUB_CONFIG_CHECK_ENTITY("Outside_Temperature");
     VALUE_u8;
   default:
   return 0;

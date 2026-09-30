@@ -243,7 +243,7 @@
 // P1/P2 write buffer size for writing to P1P2bus, max packet size is 24 (have not seen anytyhing over 24 (23+CRC))
 #define WB_SIZE 25
 // P1/P2 read buffer size to store raw data and error codes read from P1P2bus; 1 extra for reading back CRC byte; 24 might be enough
-#define RB_SIZE 33
+#define RB_SIZE 65
 #endif /* EF_SERIES */
 
 #ifdef F1F2_SERIES
