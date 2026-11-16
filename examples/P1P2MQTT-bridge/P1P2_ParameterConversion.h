@@ -6192,7 +6192,7 @@ if ((packetSrc == 0x89) && (packetDst == 0x00) && (packetType == 0x30)) {
     HACONFIG;
     HATEMP0;
     KEY1_PUB_CONFIG_CHECK_ENTITY("Outside_Temperature");
-    VALUE_u8;
+    VALUE_s8;
   default:
   UNKNOWN_BYTE;
   }
